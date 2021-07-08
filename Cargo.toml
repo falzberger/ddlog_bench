@@ -1,0 +1,15 @@
+[package]
+name = "bench_ddlog"
+version = "0.1.0"
+edition = "2018"
+authors = ["Alexander Falzberger (https://github.com/falzberger/)"]
+description = "A Rust binary for benchmarking a compiled ddlog program"
+
+[dependencies]
+clap = "2.33.3"
+csv = "1.1"
+differential_datalog = { path = "query_ddlog/differential_datalog" }
+query = { path = "query_ddlog" }
+ddlog_rt = { path = "query_ddlog/types/ddlog_rt" }
+types = { path = "query_ddlog/types" }
+ordered-float = "2.0.0"

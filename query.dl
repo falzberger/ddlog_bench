@@ -1,0 +1,35 @@
+/*
+Differential Datalog Benchmark Queries
+======================================
+Uncomment on of the queries below and then compile it to run it with the provided benchmark datasets.
+We use the same query file for all queries, as otherwise, we would require a separate cargo project
+specifically designed for the compiled queries to run it with the Rust API (on of the drawbacks of
+DDlog's compilation approach).
+*/
+input relation Edge(parent: string, child: string, weight: float)
+
+// 1) Computing the Root(s) of the dataset
+// output relation Root(node: string)
+// Root(x) :- Edge(x, _, _), not Edge(_, x, _).
+
+// 2) Computing the transitive closure of all ownership relations
+output relation Owns(parent: string, child: string, weight: float)
+Owns(x, y, w) :- Edge(x, y, w), w >= 0.5.
+Owns(x, z, w1*w2) :- Owns(x, y, w1), Owns(y, z, w2), w1*w2 >= 0.5.
+
+
+// 3) Computing the aggregate weights of all roots
+// relation Root(node: string)
+// relation RootChild(root: string, child: string, weight: float)
+// output relation AggregateRoot(node: string, sum: float)
+//
+// Root(x) :- Edge(x, _, _), not Edge(_, x, _).
+//
+// // multiplicative weight from roots to all children
+// RootChild(x, y, w) :- Root(x), Edge(x, y, w).
+// RootChild(x, z, w1*w2) :- RootChild(x, y, w1), Edge(y, z, w2).
+//
+// // additive weight of all children of the root
+// AggregateRoot(root, weight_sum) :-
+//     RootChild(root, _, weight),
+//     var weight_sum = weight.group_by(root).group_sum().

@@ -1,0 +1,4 @@
+add_or_remove, relation, parent, child, weight
+-1,edge,C250000,C250001,0.1229
+-1,edge,C500000,C500001,0.0273
+-1,edge,C750000,C750001,0.0536
