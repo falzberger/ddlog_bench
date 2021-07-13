@@ -29,7 +29,7 @@ fn parse_tuple_for_relation(tuple: StringRecord, offset: usize, relation: Relati
             child: tuple[offset + 1].to_string(),
             weight: OrderedFloat::from(tuple[offset + 2].parse::<f32>().unwrap()),
         }
-        .into_ddvalue(),
+            .into_ddvalue(),
         _ => panic!("Unsupported input relation: {:?}", relation),
     }
 }
@@ -109,11 +109,11 @@ fn main() -> Result<(), String> {
         initial_start.elapsed().as_micros()
     );
 
-    let start = std::time::Instant::now();
     let updates: Vec<_> = matches
         .values_of("updates")
         .map_or_else(Vec::new, |values| values.collect());
     for file_name in updates {
+        let start = std::time::Instant::now();
         println!("Adding updates from file {} to the dataflow", file_name);
         let file = File::open(file_name).expect(&*format!("Could not open file {}", file_name));
         let mut rdr = ReaderBuilder::new().has_headers(true).from_reader(file);
