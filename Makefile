@@ -4,6 +4,8 @@ PYTHON=python3
 
 all: generate compile execute-chain execute-single execute-multiple
 
+execute: execute-chain execute-single execute-multiple
+
 compile:
 	echo "Compiling query.dl to query_ddlog..."
 	ddlog --nested-ts-32 -i query.dl
